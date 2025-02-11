@@ -1,0 +1,266 @@
+[gd_scene load_steps=16 format=3 uid="uid://cak4ffqlii7jj"]
+
+[ext_resource type="Script" uid="uid://cungsejmtghmx" path="res://actor/player/character/player.gd" id="1_b8fh7"]
+[ext_resource type="Shape3D" uid="uid://bfum1e10js0e2" path="res://actor/player/character/collisions/bubble_collision.tres" id="2_ev6hk"]
+[ext_resource type="Material" uid="uid://bvdte1fpp1ob6" path="res://actor/player/character/skin/placeholder_material.tres" id="2_gxdkt"]
+[ext_resource type="PackedScene" uid="uid://dg3qo8lbnnpod" path="res://actor/player/state/player_state_machine.tscn" id="3_ev6hk"]
+[ext_resource type="PackedScene" uid="uid://ngle64p2pdcm" path="res://actor/player/state/character_idle/character_idle.tscn" id="4_jbgir"]
+[ext_resource type="PackedScene" uid="uid://4fh35kmw0pbo" path="res://actor/player/state/character_move/character_move.tscn" id="5_jwfuk"]
+[ext_resource type="PackedScene" uid="uid://penrkynr7bop" path="res://actor/player/state/character_jump/character_jump.tscn" id="6_x1oj0"]
+[ext_resource type="PackedScene" uid="uid://t45y43p3e8yi" path="res://actor/player/state/bubble_state/bubble_state.tscn" id="7_hrlpi"]
+[ext_resource type="Shape3D" uid="uid://drtaw63b1s7wn" path="res://actor/player/character/collisions/character_collision.tres" id="9_jbgir"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_edf6h"]
+material = ExtResource("2_gxdkt")
+
+[sub_resource type="SphereMesh" id="SphereMesh_b8fh7"]
+radius = 0.6
+height = 1.3
+
+[sub_resource type="Animation" id="Animation_x1oj0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerCollision:shape")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_jbgir")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skin/CharacterModel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skin/CharacterModel:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 2.3, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skin/BubbleModel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skin/BubbleModel:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.01, 0.009, 0.01)]
+}
+
+[sub_resource type="Animation" id="Animation_jwfuk"]
+resource_name = "bubble_switch"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerCollision:shape")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("9_jbgir"), ExtResource("2_ev6hk")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skin/CharacterModel:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skin/CharacterModel:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0166667, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 2.3, 1), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skin/BubbleModel:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skin/BubbleModel:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0166667, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.01, 0.01, 0.01), Vector3(1, 0.894456, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ev6hk"]
+resource_name = "character_switch"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerCollision:shape")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_ev6hk"), ExtResource("9_jbgir")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Skin/CharacterModel:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.004, 0.01, 0.004), Vector3(1, 2.3, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Skin/CharacterModel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Skin/BubbleModel:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.966667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.9, 1), Vector3(0.01, 0.009, 0.01)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Skin/BubbleModel:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hrlpi"]
+_data = {
+&"RESET": SubResource("Animation_x1oj0"),
+&"bubble_switch": SubResource("Animation_jwfuk"),
+&"character_switch": SubResource("Animation_ev6hk")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 16
+script = ExtResource("1_b8fh7")
+ground_acceleration = 10.0
+ground_deceleration = 5.0
+air_acceleration = 2.0
+air_deceleration = 20.0
+gravity = 20.0
+jump_buffer_time = 0.4
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.00158691, 0)
+shape = ExtResource("9_jbgir")
+
+[node name="Skin" type="Node3D" parent="."]
+
+[node name="CharacterModel" type="MeshInstance3D" parent="Skin"]
+transform = Transform3D(1, 0, 0, 0, 2.3, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_edf6h")
+skeleton = NodePath("../../../..")
+
+[node name="BubbleModel" type="MeshInstance3D" parent="Skin"]
+transform = Transform3D(0.01, 0, 0, 0, 0.009, 0, 0, 0, 0.01, 0, 0, 0)
+visible = false
+mesh = SubResource("SphereMesh_b8fh7")
+skeleton = NodePath("../../../..")
+
+[node name="PlayerStateMachine" parent="." node_paths=PackedStringArray("initial_state") instance=ExtResource("3_ev6hk")]
+initial_state = NodePath("CharacterIdle")
+
+[node name="CharacterIdle" parent="PlayerStateMachine" node_paths=PackedStringArray("character") instance=ExtResource("4_jbgir")]
+character = NodePath("../..")
+
+[node name="CharacterMove" parent="PlayerStateMachine" node_paths=PackedStringArray("character") instance=ExtResource("5_jwfuk")]
+character = NodePath("../..")
+
+[node name="CharacterJump" parent="PlayerStateMachine" node_paths=PackedStringArray("character") instance=ExtResource("6_x1oj0")]
+character = NodePath("../..")
+
+[node name="BubbleState" parent="PlayerStateMachine" node_paths=PackedStringArray("animation_player", "character") instance=ExtResource("7_hrlpi")]
+bounce_multiplier = 1.05
+influence_factor = 0.4
+bounce_input_time = 0.1
+animation_player = NodePath("../../AnimationPlayer")
+character = NodePath("../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_hrlpi")
+}

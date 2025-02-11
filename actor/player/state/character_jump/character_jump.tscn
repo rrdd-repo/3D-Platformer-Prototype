@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://penrkynr7bop"]
+
+[ext_resource type="Script" uid="uid://yvvf36och1mr" path="res://actor/player/state/character_jump/character_jump.gd" id="1_aysck"]
+[ext_resource type="Script" uid="uid://ctmckfx14ewov" path="res://actor/player/state/player_state.gd" id="1_gsql1"]
+
+[node name="CharacterJump" type="Node"]
+script = ExtResource("1_aysck")
+metadata/_custom_type_script = ExtResource("1_gsql1")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://t45y43p3e8yi"]
+
+[ext_resource type="Script" uid="uid://dx0moeu2ghud3" path="res://actor/player/state/bubble_state/bubble_state.gd" id="1_fjofa"]
+[ext_resource type="Script" uid="uid://ctmckfx14ewov" path="res://actor/player/state/player_state.gd" id="1_r5io3"]
+
+[node name="BubbleState" type="Node"]
+script = ExtResource("1_fjofa")
+metadata/_custom_type_script = ExtResource("1_r5io3")

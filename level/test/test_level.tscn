@@ -1,0 +1,126 @@
+[gd_scene load_steps=17 format=3 uid="uid://bo7c81h3sluf2"]
+
+[ext_resource type="PackedScene" uid="uid://cak4ffqlii7jj" path="res://actor/player/character/player.tscn" id="2_mmpij"]
+[ext_resource type="PackedScene" uid="uid://ds4i86qvhvuex" path="res://level/test/architecture/white_platform/white_platform.tscn" id="2_pw3dq"]
+[ext_resource type="Material" uid="uid://b18yuty20fx1p" path="res://level/test/architecture/white_platform/white_platform.tres" id="3_mmpij"]
+[ext_resource type="AudioStream" uid="uid://tgunuc8rmbtv" path="res://level/test/audio/mysterious.ogg" id="4_mmpij"]
+
+[sub_resource type="Environment" id="Environment_vfxb1"]
+tonemap_mode = 1
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pw3dq"]
+bounce = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmpij"]
+diffuse_mode = 3
+
+[sub_resource type="SphereMesh" id="SphereMesh_rdm8p"]
+material = SubResource("StandardMaterial3D_mmpij")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_try3u"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sw2eg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sw2eg"]
+shading_mode = 0
+albedo_color = Color(0.437683, 0.789836, 0.541749, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_uvl3l"]
+material = SubResource("StandardMaterial3D_sw2eg")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_pw3dq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_uvl3l"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sw2eg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_uvl3l"]
+material = ExtResource("3_mmpij")
+
+[node name="TestLevel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vfxb1")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.716862, 0.489855, -0.496136, 2.5084e-08, 0.711597, 0.702588, 0.697215, 0.503659, -0.510117, 0, 9.9826, 5.09526)
+light_specular = 0.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.963181, 0.268853, 0, -0.268853, 0.963181, 4.18311, 5.91118, 9.09966)
+
+[node name="Actors" type="Node" parent="."]
+
+[node name="Bubble" type="RigidBody3D" parent="Actors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.64052, -3.37091)
+collision_layer = 2
+collision_mask = 17
+physics_material_override = SubResource("PhysicsMaterial_pw3dq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Actors/Bubble"]
+mesh = SubResource("SphereMesh_rdm8p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Actors/Bubble"]
+shape = SubResource("SphereShape3D_try3u")
+
+[node name="Player" parent="Actors" instance=ExtResource("2_mmpij")]
+
+[node name="Architecture" type="Node" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Architecture"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.33607, 0)
+collision_layer = 16
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_sw2eg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Architecture/Ground"]
+transform = Transform3D(500, 0, 0, 0, 500, 0, 0, 0, 500, 0, 0, 0)
+mesh = SubResource("PlaneMesh_uvl3l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Ground"]
+shape = SubResource("WorldBoundaryShape3D_pw3dq")
+
+[node name="Platform" parent="Architecture" instance=ExtResource("2_pw3dq")]
+transform = Transform3D(5.66969, 0, 0, 0, 2.96053, 0, 0, 0, 2.87152, 1.1787, 0.187498, -3.63363)
+
+[node name="Platform2" type="StaticBody3D" parent="Architecture"]
+transform = Transform3D(5.66969, 0, 0, 0, 2.96053, 0, 0, 0, 2.87152, 5.96933, -1.68059, -2.90837)
+collision_layer = 16
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_uvl3l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Platform2"]
+shape = SubResource("BoxShape3D_sw2eg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Architecture/Platform2"]
+mesh = SubResource("BoxMesh_uvl3l")
+
+[node name="Platform3" type="StaticBody3D" parent="Architecture"]
+transform = Transform3D(5.12494, 1.26624, 0, -2.42495, 2.67608, 0, 0, 0, 2.87152, 5.95832, -0.817846, -3.8976)
+collision_layer = 16
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_uvl3l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Platform3"]
+shape = SubResource("BoxShape3D_sw2eg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Architecture/Platform3"]
+mesh = SubResource("BoxMesh_uvl3l")
+
+[node name="Platform4" type="StaticBody3D" parent="Architecture"]
+transform = Transform3D(5.12494, 1.26624, 0, -2.42495, 2.67608, 0, 0, 0, 2.87152, -0.870996, 6.34516, -1.99046)
+collision_layer = 16
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_uvl3l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Architecture/Platform4"]
+shape = SubResource("BoxShape3D_sw2eg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Architecture/Platform4"]
+mesh = SubResource("BoxMesh_uvl3l")
+
+[node name="Aesthetics" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Aesthetics"]
+stream = ExtResource("4_mmpij")
+autoplay = true

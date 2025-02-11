@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://4fh35kmw0pbo"]
+
+[ext_resource type="Script" uid="uid://cx2f7y7yodn0t" path="res://actor/player/state/character_move/character_move.gd" id="1_cg5bm"]
+[ext_resource type="Script" uid="uid://ctmckfx14ewov" path="res://actor/player/state/player_state.gd" id="2_abg25"]
+
+[node name="CharacterMoveState" type="Node"]
+script = ExtResource("1_cg5bm")
+metadata/_custom_type_script = ExtResource("2_abg25")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ngle64p2pdcm"]
+
+[ext_resource type="Script" uid="uid://cf06c1shcin3j" path="res://actor/player/state/character_idle/character_idle.gd" id="1_xjnpn"]
+[ext_resource type="Script" uid="uid://ctmckfx14ewov" path="res://actor/player/state/player_state.gd" id="2_dmhes"]
+
+[node name="CharacterIdle" type="Node"]
+script = ExtResource("1_xjnpn")
+metadata/_custom_type_script = ExtResource("2_dmhes")
